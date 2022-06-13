@@ -2,8 +2,8 @@
 
 module Redrate
   module Mixin
-    def limit_method(method, rate:, interval: 60)
-      queue = Queue.new(rate, interval: interval, key: "#{self.name}##{method}")
+    def limit_method(method, rate:, interval: 60, redis:)
+      queue = Queue.new(rate, redis, interval: interval, key: "#{self.name}##{method}")
 
       mixin = Module.new do
         define_method(method) do |*args|

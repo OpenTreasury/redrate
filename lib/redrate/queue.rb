@@ -6,8 +6,8 @@ module Redrate
   class Queue
     EPOCH = 0
 
-    def initialize(size, interval: 60, key: 'queue')
-      @ring = Ring.new(size, key, EPOCH)
+    def initialize(size, redis, interval: 60, key: 'queue')
+      @ring = Ring.new(size, key, EPOCH, redis)
       @interval = interval
     end
 
